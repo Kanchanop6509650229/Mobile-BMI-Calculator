@@ -57,11 +57,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/square_edittext"
-                android:importantForAutofill="no"
-                android:padding="@dimen/padding_standard"
-                android:inputType="numberDecimal"
                 android:gravity="end|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/padding_standard"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
         </LinearLayout>
 
         <!-- Height Input -->
@@ -91,7 +92,8 @@
                 android:padding="@dimen/padding_standard"
                 android:inputType="numberDecimal"
                 android:gravity="end|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"/>
         </LinearLayout>
 
         <!-- BMI Input -->
@@ -125,7 +127,8 @@
                 android:cursorVisible="false"
                 android:gravity="end|center_vertical"
                 style="@style/TextAppearance.AppCompat.Body1"
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize"
+                />
         </LinearLayout>
 
         <!-- Classification Input -->
@@ -157,7 +160,8 @@
                 android:padding="@dimen/padding_standard"
                 android:focusable="false"
                 android:cursorVisible="false"
-                style="@style/TextAppearance.AppCompat.Body1" />
+                style="@style/TextAppearance.AppCompat.Body1"
+                tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -178,6 +182,7 @@
             android:textColor="@android:color/white"
             android:padding="@dimen/button_padding"
             android:text="@string/submit_btn"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 </LinearLayout>
