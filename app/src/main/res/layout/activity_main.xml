@@ -16,7 +16,6 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="@string/header"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -27,9 +26,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="@dimen/padding_standard"
         android:background="@android:color/white"
         android:elevation="4dp"
         android:layout_gravity="center_horizontal"
@@ -40,15 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/padding_standard">
 
             <TextView
                 android:id="@+id/weight_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/text_margin_end"
                 android:text="@string/weight"
+                android:labelFor="@+id/weight_input"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -57,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/square_edittext"
-                android:padding="10dp"
+                android:importantForAutofill="no"
+                android:padding="@dimen/padding_standard"
                 android:inputType="numberDecimal"
                 android:gravity="end|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -68,15 +69,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/padding_standard">
 
             <TextView
                 android:id="@+id/height_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/text_margin_end"
                 android:text="@string/height"
+                android:labelFor="@+id/height_input"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -85,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/square_edittext"
-                android:padding="10dp"
+                android:importantForAutofill="no"
+                android:padding="@dimen/padding_standard"
                 android:inputType="numberDecimal"
                 android:gravity="end|center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -96,14 +99,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/padding_standard"
+            >
 
             <TextView
                 android:id="@+id/bmi_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/text_margin_end"
                 android:text="@string/bmi"
                 android:labelFor="@+id/bmi_input"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -116,11 +120,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/square_edittext"
-                android:padding="10dp"
+                android:padding="@dimen/padding_standard"
                 android:focusable="false"
                 android:cursorVisible="false"
                 android:gravity="end|center_vertical"
-                style="@style/TextAppearance.AppCompat.Body1"/>
+                style="@style/TextAppearance.AppCompat.Body1"
+                tools:ignore="VisualLintTextFieldSize" />
         </LinearLayout>
 
         <!-- Classification Input -->
@@ -128,15 +133,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/padding_standard">
 
             <TextView
                 android:id="@+id/classification_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/text_margin_end"
                 android:text="@string/classification"
+                android:labelFor="@+id/classification_input"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -148,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/square_edittext"
-                android:padding="10dp"
+                android:padding="@dimen/padding_standard"
                 android:focusable="false"
                 android:cursorVisible="false"
                 style="@style/TextAppearance.AppCompat.Body1" />
@@ -160,16 +166,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/button_padding_horizontal">
 
         <Button
             android:id="@+id/submitButton"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="?android:attr/colorAccent"
             android:textColor="@android:color/white"
-            android:padding="12dp"
+            android:padding="@dimen/button_padding"
             android:text="@string/submit_btn"
             android:textStyle="bold" />
     </LinearLayout>

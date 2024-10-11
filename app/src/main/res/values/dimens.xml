@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_horizontal_margin">35dp</dimen>
-    <dimen name="activity_vertical_margin">20dp</dimen>
+    <dimen name="activity_vertical_margin">30dp</dimen>
     <dimen name="view_margin_vertical">10dp</dimen>
-    <dimen name="text_margin_vertical">7dp</dimen>
-    <dimen name="padding_standard">12dp</dimen>
+    <dimen name="text_margin_end">10dp</dimen>
+    <dimen name="padding_standard">10dp</dimen>
     <dimen name="text_margin">35dp</dimen>
     <dimen name="button_padding_vertical">15dp</dimen>
     <dimen name="edittxt_minwidth">30dp</dimen>
     <dimen name="button_padding_horizontal">50dp</dimen>
+    <dimen name="button_padding">12dp</dimen>
 </resources>
