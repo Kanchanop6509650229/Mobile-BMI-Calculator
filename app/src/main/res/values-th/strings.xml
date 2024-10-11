@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BMI cal</string>
+    <string name="header">ค่าดัชนีมวลกาย</string>
+    <string name="weight">นํ้าหนัก (กิโลกรัม)</string>
+    <string name="height">ส่วนสูง (เซนติเมตร)</string>
+    <string name="bmi">ค่าดัชนีมวลกาย</string>
+    <string name="classification">อยู่ในเกณฑ์</string>
+    <string name="submit_btn">คํานวณ</string>
+    <string name="no_input_alert">กรุณากรอกน้ำหนักและส่วนสูง</string>
+    <string name="input_zero_alert">กรุณากรอกส่วนสูงและน้ำหนักที่มากกว่า 0</string>
+    <string name="severe_thinness">ผอมอย่างรุนแรง</string>
+    <string name="moderate_thinness">ผอมปานกลาง</string>
+    <string name="light_thinness">ผอมเล็กน้อย</string>
+    <string name="normal">น้ำหนักปกติ</string>
+    <string name="overweight">น้ำหนักเกิน</string>
+    <string name="obese_class_i">โรคอ้วนระดับ 1</string>
+    <string name="obese_class_ii">โรคอ้วนระดับ 2</string>
+    <string name="obese_class_iii">โรคอ้วนระดับ 3</string>
+</resources>

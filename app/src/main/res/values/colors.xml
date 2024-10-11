@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="textColor">#1f497d</color>
+    <color name="lightgrey">#C0BFBF</color>
+    <color name="severe_thinness_color">#FFB3BA</color>
+    <color name="moderate_thinness_color">#FFDFBA</color>
+    <color name="light_thinness_color">#FFFFBA</color>
+    <color name="normal_color">#B2FFB2</color>
+    <color name="overweight_color">#FFFFB2</color>
+    <color name="obese_class_i_color">#FFB2D1</color>
+    <color name="obese_class_ii_color">#FFA07A</color>
+    <color name="obese_class_iii_color">#D1B2FF</color>
+</resources>

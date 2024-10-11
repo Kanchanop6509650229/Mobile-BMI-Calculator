@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BMI cal</string>
+    <string name="header">Body Mass Index (BMI)</string>
+    <string name="weight">Weight (kilograms)</string>
+    <string name="height">Height (centimeters)</string>
+    <string name="bmi">BMI</string>
+    <string name="classification">Classification</string>
+    <string name="submit_btn">Calculate</string>
+    <string name="no_input_alert">Please enter both weight and height</string>
+    <string name="input_zero_alert">Please enter height and weight greater than 0</string>
+    <string name="severe_thinness">Severe Thinness</string>
+    <string name="moderate_thinness">Moderate Thinness</string>
+    <string name="light_thinness">Mild Thinness</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Overweight</string>
+    <string name="obese_class_i">Obese Class I</string>
+    <string name="obese_class_ii">Obese Class II</string>
+    <string name="obese_class_iii">Obese Class III</string>
+</resources>
