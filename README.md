@@ -8,3 +8,5 @@
 3. นายเตชิต จันทร์ลี 6509650419
 
    จัดทำหน้า Main Layout
+
+Link Video Check list: https://drive.google.com/file/d/1Fj0fTNvUKYVYxEy9NzwXSTj9-lQNrBFR/view?usp=drivesdk
