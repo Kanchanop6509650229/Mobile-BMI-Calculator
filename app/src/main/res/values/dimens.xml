@@ -9,4 +9,5 @@
     <dimen name="edittxt_minwidth">30dp</dimen>
     <dimen name="button_padding_horizontal">50dp</dimen>
     <dimen name="button_padding">12dp</dimen>
+    <dimen name="layout_width">0dp</dimen>
 </resources>
