@@ -1,12 +1,24 @@
 package com.example.bmical;
 
+import static android.provider.BaseColumns._ID;
+import static com.example.bmical.Constants.BMI;
+import static com.example.bmical.Constants.CLASSIFICATION;
+import static com.example.bmical.Constants.DATE;
+import static com.example.bmical.Constants.TABLE_NAME;
+import static com.example.bmical.Constants.WEIGHT;
+
+import android.content.ContentValues;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +29,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView classificationTxt;
     private EditText classificationResult;
     private Button submitBtn;
+    private EventsData events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +99,62 @@ public class MainActivity extends AppCompatActivity {
                     bmiResult.setBackgroundColor(getClassificationColor(bmi));
                     classificationResult.setBackgroundColor(getClassificationColor(bmi));
 
+                    events = new EventsData(MainActivity.this);
+                    try{
+                        addEvent();
+                        Cursor cursor = getEvents();
+                        showEvents(cursor);
+                    }finally{
+                        events.close();
+                    }
+
                 } else {
                     Toast.makeText(MainActivity.this, R.string.no_input_alert, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+    private void addEvent() {
+        String weight = String.format("%1$s", weightEditText.getText());
+        String bmi = String.format("%1$s", bmiResult.getText());
+        String classification = String.format("%1$s", classificationResult.getText());
+        SQLiteDatabase db = events.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DATE, System.currentTimeMillis());
+        values.put(WEIGHT, weight);
+        values.put(BMI, bmi);
+        values.put(CLASSIFICATION, classification);
+        db.insert(TABLE_NAME, null, values);
+    }//end addEvent
+
+    private Cursor getEvents() {
+        String[] FROM = {_ID, DATE, WEIGHT, BMI, CLASSIFICATION};
+        String ORDER_BY = DATE + " DESC";
+        SQLiteDatabase db = events.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
+        return cursor;
+    }//end getEvents
+
+    private void showEvents(Cursor cursor) {
+        final ListView listView = findViewById(R.id.listView);
+        final ArrayList<HashMap<String, String>> MyArrList = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map;
+        while(cursor.moveToNext()) {
+            map = new HashMap<String, String>();
+            map.put("row_id", String.valueOf(cursor.getLong(0)));
+            map.put("date", String.valueOf(cursor.getLong(1)));
+            map.put("weight", cursor.getString(2));
+            map.put("bmi", cursor.getString(3));
+            map.put("classification", cursor.getString(4));
+            MyArrList.add(map);
+        }
+        SimpleAdapter sAdap;
+        sAdap = new SimpleAdapter( MainActivity.this, MyArrList, R.layout.column,
+                new String[] {"row_id", "date", "weight", "bmi", "classification"},
+                new int[] {R.id.col_row_id, R.id.col_date, R.id.col_weight, R.id.col_bmi, R.id.col_classification} );
+        listView.setAdapter(sAdap);
+    }//end showEvents
 
     @Override
     public void onConfigurationChanged(Configuration newConfig){

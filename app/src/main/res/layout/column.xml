@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView	android:id="@+id/col_row_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/row_id"
+        android:gravity="center"/>
+    <TextView	android:id="@+id/col_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/date"
+        android:gravity="center"/>
+    <TextView	android:id="@+id/col_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/weight"
+        android:gravity="center"/>
+    <TextView	android:id="@+id/col_bmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/bmi"
+        android:gravity="center"/>
+    <TextView	android:id="@+id/col_classification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/classification"
+        android:gravity="center"/>
+</LinearLayout>
