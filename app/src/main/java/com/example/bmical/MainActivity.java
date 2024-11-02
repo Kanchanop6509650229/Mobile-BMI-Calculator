@@ -105,12 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     double bmi = getCalculatedBMI(weight, height);
 
-                    bmiResult.setText(formatter.format(bmi));
-
-                    classificationResult.setText(getClassification(bmi));
-
-                    bmiResult.setBackgroundColor(getClassificationColor(bmi));
-                    classificationResult.setBackgroundColor(getClassificationColor(bmi));
+                    updateResults(bmi);
 
                     events = new EventsData(MainActivity.this);
                     try{
@@ -136,10 +131,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void updateResults(double bmi) {
+        bmiResult.setText(formatter.format(bmi));
+
+        int classificationResourceId = Integer.parseInt(getClassification(bmi));
+        String classificationText = getString(classificationResourceId);
+        classificationResult.setText(classificationText);
+
+        classificationResult.setTag(String.valueOf(classificationResourceId));
+
+        int color = getClassificationColor(bmi);
+        bmiResult.setBackgroundColor(color);
+        classificationResult.setBackgroundColor(color);
+    }
+
     private void addEvent() {
         String weight = String.format("%1$s", weightEditText.getText());
         String bmi = String.format("%1$s", bmiResult.getText());
-        String classification = String.format("%1$s", classificationResult.getText());
+        String classification = String.format("%1$s", classificationResult.getTag());
         String height = String.format("%1$s", heightEditText.getText());
         int color = getClassificationColor(Double.parseDouble(bmi));
         SQLiteDatabase db = events.getWritableDatabase();
@@ -187,23 +196,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String getClassification(double bmi) {
+        int stringResourceId;
         if (bmi < 16) {
-            return getString(R.string.severe_thinness);
+            stringResourceId = R.string.severe_thinness;
         } else if (bmi >= 16 && bmi < 17) {
-            return getString(R.string.moderate_thinness);
+            stringResourceId = R.string.moderate_thinness;
         } else if (bmi >= 17 && bmi < 18.5) {
-            return getString(R.string.light_thinness);
+            stringResourceId = R.string.light_thinness;
         } else if (bmi >= 18.5 && bmi < 25) {
-            return getString(R.string.normal);
+            stringResourceId = R.string.normal;
         } else if (bmi >= 25 && bmi < 30) {
-            return getString(R.string.overweight);
+            stringResourceId = R.string.overweight;
         } else if (bmi >= 30 && bmi < 35) {
-            return getString(R.string.obese_class_i);
+            stringResourceId = R.string.obese_class_i;
         } else if (bmi >= 35 && bmi < 40) {
-            return getString(R.string.obese_class_ii);
+            stringResourceId = R.string.obese_class_ii;
         } else {
-            return getString(R.string.obese_class_iii);
+            stringResourceId = R.string.obese_class_iii;
         }
+        return String.valueOf(stringResourceId);
     }
 
     private int getClassificationColor(double bmi) {

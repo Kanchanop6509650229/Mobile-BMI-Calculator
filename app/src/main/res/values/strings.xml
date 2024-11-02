@@ -17,7 +17,9 @@
     <string name="obese_class_ii">Obese Class II</string>
     <string name="obese_class_iii">Obese Class III</string>
     <string name="date">Date</string>
-    <string name="row_id" translatable="false">ID</string>
+    <string name="row_id">ID</string>
     <string name="history">History</string>
     <string name="weight_height_error">Error, Height must be greater than weight</string>
+    <string name="record_deleted">Record deleted successfully</string>
+    <string name="delete_failed">Failed to delete record</string>
 </resources>

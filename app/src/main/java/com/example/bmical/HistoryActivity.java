@@ -13,9 +13,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +34,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     private EventsData events;
     private TableLayout tableContent;
-    private boolean alternateColor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,34 +49,41 @@ public class HistoryActivity extends AppCompatActivity {
         tableContent = findViewById(R.id.tableContent);
 
         events = new EventsData(HistoryActivity.this);
+        loadData();
+    }
+
+    private void loadData() {
         try {
             Cursor cursor = getEvents();
             if (cursor != null && cursor.getCount() > 0) {
                 showEvents(cursor);
-            } else {
-                if (cursor != null) {
-                    cursor.close();
-                }
+            }
+            if (cursor != null) {
+                cursor.close();
             }
         } catch (Exception e) {
-
-        } finally {
-            events.close();
+            e.printStackTrace();
         }
     }
 
     private void showEvents(Cursor cursor) {
+        tableContent.removeAllViews();
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HH:mm", new Locale("th", "TH"));
 
         while(cursor.moveToNext()) {
             TableRow row = new TableRow(this);
+            final long rowId = cursor.getLong(0);
 
-            TextView idView = createTextView(String.valueOf(cursor.getLong(0)));
+            TextView idView = createTextView(String.valueOf(rowId));
             TextView dateView = createTextView(dateFormat.format(new Date(cursor.getLong(1))));
             TextView weightView = createTextView(cursor.getString(2));
             TextView heightView = createTextView(cursor.getString(3));
             TextView bmiView = createTextView(cursor.getString(4));
-            TextView classView = createTextView(cursor.getString(5));
+
+            int classificationResourceId = Integer.parseInt(cursor.getString(5));
+            String classificationText = getString(classificationResourceId);
+            TextView classView = createTextView(classificationText);
 
             int color = cursor.getInt(6);
 
@@ -89,6 +98,21 @@ public class HistoryActivity extends AppCompatActivity {
             row.addView(classView);
 
             tableContent.addView(row);
+        }
+    }
+
+    private void deleteRecord(long id) {
+        SQLiteDatabase db = events.getWritableDatabase();
+        String whereClause = _ID + "=?";
+        String[] whereArgs = {String.valueOf(id)};
+
+        int deletedRows = db.delete(TABLE_NAME, whereClause, whereArgs);
+
+        if (deletedRows > 0) {
+            Toast.makeText(this, R.string.record_deleted, Toast.LENGTH_SHORT).show();
+            loadData();
+        } else {
+            Toast.makeText(this, R.string.delete_failed, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,10 +133,18 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private Cursor getEvents() {
-        String[] FROM = {_ID, DATE, WEIGHT, HEIGHT, BMI, CLASSIFICATION, COLOR}; // เพิ่ม COLOR
+        String[] FROM = {_ID, DATE, WEIGHT, HEIGHT, BMI, CLASSIFICATION, COLOR};
         String ORDER_BY = DATE + " DESC";
         SQLiteDatabase db = events.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
         return cursor;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (events != null) {
+            events.close();
+        }
     }
 }

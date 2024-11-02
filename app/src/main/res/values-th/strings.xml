@@ -18,6 +18,9 @@
     <string name="obese_class_ii">โรคอ้วนระดับ 2</string>
     <string name="obese_class_iii">โรคอ้วนระดับ 3</string>
     <string name="date">วันที่</string>
+    <string name="row_id">ลำดับ</string>
     <string name="history">ประวัติ</string>
     <string name="weight_height_error">เกิดข้อผิดพลาด ความสูงต้องมากกว่าน้ำหนัก</string>
+    <string name="record_deleted">ลบข้อมูลสำเร็จ</string>
+    <string name="delete_failed">เกิดข้อผิดพลาดในการลบข้อมูล</string>
 </resources>
