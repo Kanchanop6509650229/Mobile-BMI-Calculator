@@ -1,6 +1,7 @@
 package com.example.bmical;
 
 import static android.provider.BaseColumns._ID;
+import static com.example.bmical.Constants.COLOR;
 import static com.example.bmical.Constants.HEIGHT;
 import static com.example.bmical.Constants.TABLE_NAME;
 import static com.example.bmical.Constants.DATE;
@@ -24,7 +25,9 @@ public class EventsData extends SQLiteOpenHelper {
                 + WEIGHT + " TEXT NOT NULL, "
                 + HEIGHT + " TEXT NOT NULL, "
                 + BMI + " TEXT NOT NULL, "
-                + CLASSIFICATION + " TEXT NOT NULL);");
+                + CLASSIFICATION + " TEXT NOT NULL, "
+                + COLOR + " INTEGER NOT NULL);"
+                );
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){

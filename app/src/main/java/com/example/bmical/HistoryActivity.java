@@ -3,6 +3,7 @@ package com.example.bmical;
 import static android.provider.BaseColumns._ID;
 import static com.example.bmical.Constants.BMI;
 import static com.example.bmical.Constants.CLASSIFICATION;
+import static com.example.bmical.Constants.COLOR;
 import static com.example.bmical.Constants.DATE;
 import static com.example.bmical.Constants.HEIGHT;
 import static com.example.bmical.Constants.TABLE_NAME;
@@ -68,15 +69,24 @@ public class HistoryActivity extends AppCompatActivity {
         while(cursor.moveToNext()) {
             TableRow row = new TableRow(this);
 
-            row.setBackgroundColor(alternateColor ? 0xFFF5F5F5 : 0xFFFFFFFF);
-            alternateColor = !alternateColor;
-            row.addView(createTextView(String.valueOf(cursor.getLong(0))));
-            long timestamp = cursor.getLong(1);
-            row.addView(createTextView(dateFormat.format(new Date(timestamp))));
-            row.addView(createTextView(cursor.getString(2)));
-            row.addView(createTextView(cursor.getString(3)));
-            row.addView(createTextView(cursor.getString(4)));
-            row.addView(createTextView(cursor.getString(5)));
+            TextView idView = createTextView(String.valueOf(cursor.getLong(0)));
+            TextView dateView = createTextView(dateFormat.format(new Date(cursor.getLong(1))));
+            TextView weightView = createTextView(cursor.getString(2));
+            TextView heightView = createTextView(cursor.getString(3));
+            TextView bmiView = createTextView(cursor.getString(4));
+            TextView classView = createTextView(cursor.getString(5));
+
+            int color = cursor.getInt(6);
+
+            bmiView.setBackgroundColor(color);
+            classView.setBackgroundColor(color);
+
+            row.addView(idView);
+            row.addView(dateView);
+            row.addView(weightView);
+            row.addView(heightView);
+            row.addView(bmiView);
+            row.addView(classView);
 
             tableContent.addView(row);
         }
@@ -90,7 +100,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 0,
-                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.MATCH_PARENT,
                 1f
         );
         view.setLayoutParams(params);
@@ -99,8 +109,8 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private Cursor getEvents() {
-        String[] FROM = {_ID, DATE, WEIGHT, HEIGHT, BMI, CLASSIFICATION};
-        String ORDER_BY = DATE + " ASC";
+        String[] FROM = {_ID, DATE, WEIGHT, HEIGHT, BMI, CLASSIFICATION, COLOR}; // เพิ่ม COLOR
+        String ORDER_BY = DATE + " DESC";
         SQLiteDatabase db = events.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
         return cursor;

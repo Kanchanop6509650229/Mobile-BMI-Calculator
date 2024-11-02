@@ -8,4 +8,5 @@ public interface Constants extends BaseColumns {
     public static final String HEIGHT = "height";
     public static final String BMI = "bmi";
     public static final String CLASSIFICATION = "classification";
+    public static final String COLOR = "color";
 }

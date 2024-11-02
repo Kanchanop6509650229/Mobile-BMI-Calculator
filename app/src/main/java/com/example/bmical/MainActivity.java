@@ -3,6 +3,7 @@ package com.example.bmical;
 import static android.provider.BaseColumns._ID;
 import static com.example.bmical.Constants.BMI;
 import static com.example.bmical.Constants.CLASSIFICATION;
+import static com.example.bmical.Constants.COLOR;
 import static com.example.bmical.Constants.DATE;
 import static com.example.bmical.Constants.HEIGHT;
 import static com.example.bmical.Constants.TABLE_NAME;
@@ -137,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String bmi = String.format("%1$s", bmiResult.getText());
         String classification = String.format("%1$s", classificationResult.getText());
         String height = String.format("%1$s", heightEditText.getText());
+        int color = getClassificationColor(Double.parseDouble(bmi));
+
         SQLiteDatabase db = events.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DATE, System.currentTimeMillis());
@@ -144,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(HEIGHT, height);
         values.put(BMI, bmi);
         values.put(CLASSIFICATION, classification);
+        values.put(COLOR, color);
         db.insert(TABLE_NAME, null, values);
     }//end addEvent
 
