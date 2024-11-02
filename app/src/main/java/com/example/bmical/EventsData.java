@@ -1,6 +1,7 @@
 package com.example.bmical;
 
 import static android.provider.BaseColumns._ID;
+import static com.example.bmical.Constants.HEIGHT;
 import static com.example.bmical.Constants.TABLE_NAME;
 import static com.example.bmical.Constants.DATE;
 import static com.example.bmical.Constants.WEIGHT;
@@ -21,6 +22,7 @@ public class EventsData extends SQLiteOpenHelper {
                 + _ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + DATE + " INTEGER, "
                 + WEIGHT + " TEXT NOT NULL, "
+                + HEIGHT + " TEXT NOT NULL, "
                 + BMI + " TEXT NOT NULL, "
                 + CLASSIFICATION + " TEXT NOT NULL);");
     }

@@ -18,4 +18,5 @@
     <string name="obese_class_iii">Obese Class III</string>
     <string name="date">Date</string>
     <string name="row_id" translatable="false">ID</string>
+    <string name="history">History</string>
 </resources>

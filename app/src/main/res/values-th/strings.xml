@@ -18,4 +18,5 @@
     <string name="obese_class_ii">โรคอ้วนระดับ 2</string>
     <string name="obese_class_iii">โรคอ้วนระดับ 3</string>
     <string name="date">วันที่</string>
+    <string name="history">ประวัติ</string>
 </resources>
