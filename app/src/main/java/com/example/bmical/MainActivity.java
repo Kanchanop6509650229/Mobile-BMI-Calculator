@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DecimalFormat formatter = new DecimalFormat("#,###.##");
+    DecimalFormat formatter = new DecimalFormat("#,###,###.##");
 
     private TextView header;
     private TextView weightTxt;
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (height <= 0 || weight <= 0) {
                         Toast.makeText(MainActivity.this, R.string.input_zero_alert, Toast.LENGTH_SHORT).show();
                         return;
+                    } else if (weight > height) {
+                        Toast.makeText(MainActivity.this, R.string.weight_height_error, Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
                     double bmi = getCalculatedBMI(weight, height);
@@ -139,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String classification = String.format("%1$s", classificationResult.getText());
         String height = String.format("%1$s", heightEditText.getText());
         int color = getClassificationColor(Double.parseDouble(bmi));
-
         SQLiteDatabase db = events.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DATE, System.currentTimeMillis());
