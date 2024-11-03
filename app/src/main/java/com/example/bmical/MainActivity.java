@@ -11,7 +11,6 @@ import static com.example.bmical.Constants.WEIGHT;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,8 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +31,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,62 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button submitBtn;
     private EventsData events;
     private ImageView history;
-
-    private static final String PREFS_NAME = "BMICalculatorPrefs";
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-
-        editor.putString("weight", weightEditText.getText().toString());
-        editor.putString("height", heightEditText.getText().toString());
-        editor.putString("bmi", bmiResult.getText().toString());
-
-        if (classificationResult.getTag() != null) {
-            editor.putString("classification", classificationResult.getTag().toString());
-            try {
-                double bmi = Double.parseDouble(bmiResult.getText().toString().replace(",", ""));
-                editor.putInt("color", getClassificationColor(bmi));
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-
-        editor.apply();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        String weight = settings.getString("weight", "");
-        String height = settings.getString("height", "");
-        String bmi = settings.getString("bmi", "");
-        String classification = settings.getString("classification", null);
-
-        if (!weight.isEmpty()) {
-            weightEditText.setText(weight);
-        }
-        if (!height.isEmpty()) {
-            heightEditText.setText(height);
-        }
-        if (!bmi.isEmpty()) {
-            bmiResult.setText(bmi);
-        }
-        if (classification != null) {
-            classificationResult.setTag(classification);
-            classificationResult.setText(getString(Integer.parseInt(classification)));
-
-            int color = settings.getInt("color", 0);
-            if (color != 0) {
-                bmiResult.setBackgroundColor(color);
-                classificationResult.setBackgroundColor(color);
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
