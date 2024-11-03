@@ -3,11 +3,14 @@ package com.example.bmical;
 import static android.provider.BaseColumns._ID;
 import static com.example.bmical.Constants.BMI;
 import static com.example.bmical.Constants.CLASSIFICATION;
+import static com.example.bmical.Constants.COLOR;
 import static com.example.bmical.Constants.DATE;
+import static com.example.bmical.Constants.HEIGHT;
 import static com.example.bmical.Constants.TABLE_NAME;
 import static com.example.bmical.Constants.WEIGHT;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +20,7 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +31,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DecimalFormat formatter = new DecimalFormat("#,###.##");
+    DecimalFormat formatter = new DecimalFormat("#,###,###.##");
 
     private TextView header;
     private TextView weightTxt;
@@ -49,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText classificationResult;
     private Button submitBtn;
     private EventsData events;
+    private ImageView history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -71,9 +74,12 @@ public class MainActivity extends AppCompatActivity {
         classificationTxt = findViewById(R.id.classification_txt);
         classificationResult = findViewById(R.id.classification_input);
         submitBtn = findViewById(R.id.submitButton);
+        history = findViewById(R.id.history);
 
         weightEditText.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
         heightEditText.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+
+        history.setOnClickListener(this);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,22 +94,18 @@ public class MainActivity extends AppCompatActivity {
                     if (height <= 0 || weight <= 0) {
                         Toast.makeText(MainActivity.this, R.string.input_zero_alert, Toast.LENGTH_SHORT).show();
                         return;
+                    } else if (weight > height) {
+                        Toast.makeText(MainActivity.this, R.string.weight_height_error, Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
                     double bmi = getCalculatedBMI(weight, height);
 
-                    bmiResult.setText(formatter.format(bmi));
-
-                    classificationResult.setText(getClassification(bmi));
-
-                    bmiResult.setBackgroundColor(getClassificationColor(bmi));
-                    classificationResult.setBackgroundColor(getClassificationColor(bmi));
+                    updateResults(bmi);
 
                     events = new EventsData(MainActivity.this);
                     try{
                         addEvent();
-                        Cursor cursor = getEvents();
-                        showEvents(cursor);
                     }finally{
                         events.close();
                     }
@@ -115,46 +117,54 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+        int id = view.getId();
+
+        if (id == R.id.history) {
+            startActivity(intent);
+        }
+    }
+
+    private void updateResults(double bmi) {
+        bmiResult.setText(formatter.format(bmi));
+
+        int classificationResourceId = Integer.parseInt(getClassification(bmi));
+        String classificationText = getString(classificationResourceId);
+        classificationResult.setText(classificationText);
+
+        classificationResult.setTag(String.valueOf(classificationResourceId));
+
+        int color = getClassificationColor(bmi);
+        bmiResult.setBackgroundColor(color);
+        classificationResult.setBackgroundColor(color);
+    }
+
     private void addEvent() {
         String weight = String.format("%1$s", weightEditText.getText());
         String bmi = String.format("%1$s", bmiResult.getText());
-        String classification = String.format("%1$s", classificationResult.getText());
+        String classification = String.format("%1$s", classificationResult.getTag());
+        String height = String.format("%1$s", heightEditText.getText());
+        int color = getClassificationColor(Double.parseDouble(bmi));
         SQLiteDatabase db = events.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DATE, System.currentTimeMillis());
         values.put(WEIGHT, weight);
+        values.put(HEIGHT, height);
         values.put(BMI, bmi);
         values.put(CLASSIFICATION, classification);
+        values.put(COLOR, color);
         db.insert(TABLE_NAME, null, values);
     }//end addEvent
 
     private Cursor getEvents() {
-        String[] FROM = {_ID, DATE, WEIGHT, BMI, CLASSIFICATION};
+        String[] FROM = {_ID, DATE, WEIGHT, HEIGHT, BMI, CLASSIFICATION};
         String ORDER_BY = DATE + " DESC";
         SQLiteDatabase db = events.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
         return cursor;
     }//end getEvents
-
-    private void showEvents(Cursor cursor) {
-        final ListView listView = findViewById(R.id.listView);
-        final ArrayList<HashMap<String, String>> MyArrList = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> map;
-        while(cursor.moveToNext()) {
-            map = new HashMap<String, String>();
-            map.put("row_id", String.valueOf(cursor.getLong(0)));
-            map.put("date", String.valueOf(cursor.getLong(1)));
-            map.put("weight", cursor.getString(2));
-            map.put("bmi", cursor.getString(3));
-            map.put("classification", cursor.getString(4));
-            MyArrList.add(map);
-        }
-        SimpleAdapter sAdap;
-        sAdap = new SimpleAdapter( MainActivity.this, MyArrList, R.layout.column,
-                new String[] {"row_id", "date", "weight", "bmi", "classification"},
-                new int[] {R.id.col_row_id, R.id.col_date, R.id.col_weight, R.id.col_bmi, R.id.col_classification} );
-        listView.setAdapter(sAdap);
-    }//end showEvents
 
     @Override
     public void onConfigurationChanged(Configuration newConfig){
@@ -182,23 +192,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getClassification(double bmi) {
+        int stringResourceId;
         if (bmi < 16) {
-            return getString(R.string.severe_thinness);
+            stringResourceId = R.string.severe_thinness;
         } else if (bmi >= 16 && bmi < 17) {
-            return getString(R.string.moderate_thinness);
+            stringResourceId = R.string.moderate_thinness;
         } else if (bmi >= 17 && bmi < 18.5) {
-            return getString(R.string.light_thinness);
+            stringResourceId = R.string.light_thinness;
         } else if (bmi >= 18.5 && bmi < 25) {
-            return getString(R.string.normal);
+            stringResourceId = R.string.normal;
         } else if (bmi >= 25 && bmi < 30) {
-            return getString(R.string.overweight);
+            stringResourceId = R.string.overweight;
         } else if (bmi >= 30 && bmi < 35) {
-            return getString(R.string.obese_class_i);
+            stringResourceId = R.string.obese_class_i;
         } else if (bmi >= 35 && bmi < 40) {
-            return getString(R.string.obese_class_ii);
+            stringResourceId = R.string.obese_class_ii;
         } else {
-            return getString(R.string.obese_class_iii);
+            stringResourceId = R.string.obese_class_iii;
         }
+        return String.valueOf(stringResourceId);
     }
 
     private int getClassificationColor(double bmi) {

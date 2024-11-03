@@ -11,6 +11,18 @@
     android:gravity="center_vertical"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/history"
+        android:src="@mipmap/history"
+        android:text="@string/history"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:clickable="true"
+        tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
     <!-- Header Title -->
     <TextView
         android:id="@+id/header"
@@ -186,13 +198,4 @@
             tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <ListView	android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </LinearLayout>
 </LinearLayout>
