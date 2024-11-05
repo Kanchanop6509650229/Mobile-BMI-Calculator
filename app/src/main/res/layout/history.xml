@@ -19,10 +19,10 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E0E0E0">
+                android:background="@color/back_his">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -31,47 +31,47 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/padding_standard"
                     android:text="@string/date"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/padding_standard"
                     android:text="@string/weight"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/padding_standard"
                     android:text="@string/height"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/padding_standard"
                     android:text="@string/bmi"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/padding_standard"
                     android:text="@string/classification"
                     android:textStyle="bold" />
 
