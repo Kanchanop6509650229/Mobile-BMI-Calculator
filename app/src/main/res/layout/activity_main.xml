@@ -1,198 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?android:attr/windowBackground"
-    android:gravity="center_vertical"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Header Title -->
-    <TextView
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/header"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold" />
-
-    <!-- Input Fields Section -->
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="?android:attr/windowBackground"
+        android:gravity="center|center_vertical"
         android:orientation="vertical"
-        android:padding="@dimen/padding_standard"
-        android:background="@android:color/white"
-        android:elevation="4dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="@dimen/activity_vertical_margin">
+        android:padding="16dp"
+        tools:context=".MainActivity">
 
-        <!-- Weight Input -->
+        <!-- Header Layout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="@dimen/layout_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/header"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/history"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:contentDescription="@string/history"
+                android:onClick="onClick"
+                android:src="@drawable/history"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+        </LinearLayout>
+
+        <!-- Input Fields Section -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@android:color/white"
+            android:elevation="@dimen/elevation"
+            android:orientation="vertical"
             android:padding="@dimen/padding_standard">
 
-            <TextView
-                android:id="@+id/weight_txt"
-                android:layout_width="0dp"
+            <!-- Weight Input -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/text_margin_end"
-                android:text="@string/weight"
-                android:labelFor="@+id/weight_input"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_standard">
 
-            <EditText
-                android:id="@+id/weight_input"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/weight_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/text_margin_end"
+                    android:layout_weight="1"
+                    android:labelFor="@+id/weight_input"
+                    android:text="@string/weight"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <EditText
+                    android:id="@+id/weight_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/square_edittext"
+                    android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/padding_standard"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            </LinearLayout>
+
+            <!-- Height Input -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/square_edittext"
-                android:gravity="end|center_vertical"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:padding="@dimen/padding_standard"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_standard">
+
+                <TextView
+                    android:id="@+id/height_txt"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/text_margin_end"
+                    android:layout_weight="1"
+                    android:labelFor="@+id/height_input"
+                    android:text="@string/height"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <EditText
+                    android:id="@+id/height_input"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/square_edittext"
+                    android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/padding_standard"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            </LinearLayout>
+
+            <!-- BMI Input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_standard">
+
+                <TextView
+                    android:id="@+id/bmi_txt"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/text_margin_end"
+                    android:layout_weight="1"
+                    android:labelFor="@+id/bmi_input"
+                    android:text="@string/bmi"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <EditText
+                    android:id="@+id/bmi_input"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/square_edittext"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/padding_standard"
+                    tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            </LinearLayout>
+
+            <!-- Classification Input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_standard">
+
+                <TextView
+                    android:id="@+id/classification_txt"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/text_margin_end"
+                    android:layout_weight="1"
+                    android:labelFor="@+id/classification_input"
+                    android:text="@string/classification"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <EditText
+                    android:id="@+id/classification_input"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/square_edittext"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_standard"
+                    tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Height Input -->
+        <!-- Submit Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_standard">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/button_padding_horizontal">
 
-            <TextView
-                android:id="@+id/height_txt"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/submitButton"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/text_margin_end"
-                android:text="@string/height"
-                android:labelFor="@+id/height_input"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <EditText
-                android:id="@+id/height_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/square_edittext"
-                android:importantForAutofill="no"
-                android:padding="@dimen/padding_standard"
-                android:inputType="numberDecimal"
-                android:gravity="end|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"/>
+                android:backgroundTint="?android:attr/colorAccent"
+                android:padding="@dimen/button_padding"
+                android:text="@string/submit_btn"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
 
-        <!-- BMI Input -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_standard"
-            >
-
-            <TextView
-                android:id="@+id/bmi_txt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/text_margin_end"
-                android:text="@string/bmi"
-                android:labelFor="@+id/bmi_input"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <EditText
-                android:id="@+id/bmi_input"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/square_edittext"
-                android:padding="@dimen/padding_standard"
-                android:focusable="false"
-                android:cursorVisible="false"
-                android:gravity="end|center_vertical"
-                style="@style/TextAppearance.AppCompat.Body1"
-                tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize"
-                />
-        </LinearLayout>
-
-        <!-- Classification Input -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_standard">
-
-            <TextView
-                android:id="@+id/classification_txt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/text_margin_end"
-                android:text="@string/classification"
-                android:labelFor="@+id/classification_input"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <EditText
-                android:id="@+id/classification_input"
-                android:inputType="text"
-                android:gravity="end|center_vertical"
-                android:importantForAutofill="no"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/square_edittext"
-                android:padding="@dimen/padding_standard"
-                android:focusable="false"
-                android:cursorVisible="false"
-                style="@style/TextAppearance.AppCompat.Body1"
-                tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize"/>
-        </LinearLayout>
     </LinearLayout>
-
-    <!-- Submit Button -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/button_padding_horizontal">
-
-        <Button
-            android:id="@+id/submitButton"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?android:attr/colorAccent"
-            android:textColor="@android:color/white"
-            android:padding="@dimen/button_padding"
-            android:text="@string/submit_btn"
-            android:textStyle="bold"
-            tools:ignore="VisualLintButtonSize" />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <ListView	android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>
