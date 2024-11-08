@@ -10,3 +10,4 @@
    จัดทำหน้า Main Layout, History Layout
 
 Link Video Check list: https://drive.google.com/file/d/1Fj0fTNvUKYVYxEy9NzwXSTj9-lQNrBFR/view?usp=drivesdk
+Link Video Check list 2: https://drive.google.com/file/d/1we-spCLXquTt4BzDhP7hb_kMMfYduJvQ/view?usp=drivesdk
