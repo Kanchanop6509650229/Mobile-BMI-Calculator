@@ -1,63 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:gravity="center|center_vertical"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="?android:attr/windowBackground"
-        android:gravity="center_vertical"
         tools:context=".MainActivity">
 
         <!-- Header Layout -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="@dimen/layout_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/header"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/history"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/history"
-                android:src="@mipmap/history"
+                android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:onClick="onClick"
                 android:clickable="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="@dimen/history_margin"
+                android:contentDescription="@string/history"
+                android:onClick="onClick"
+                android:src="@drawable/history"
                 tools:ignore="ImageContrastCheck,ImageContrastCheck" />
 
-            <!-- Header Title -->
-            <TextView
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/history"
-                android:gravity="center"
-                android:text="@string/header"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <!-- Input Fields Section -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_standard"
             android:background="@android:color/white"
             android:elevation="@dimen/elevation"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/activity_vertical_margin">
+            android:orientation="vertical"
+            android:padding="@dimen/padding_standard">
 
             <!-- Weight Input -->
             <LinearLayout
@@ -70,10 +72,10 @@
                     android:id="@+id/weight_txt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="@dimen/text_margin_end"
-                    android:text="@string/weight"
+                    android:layout_weight="1"
                     android:labelFor="@+id/weight_input"
+                    android:text="@string/weight"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <EditText
@@ -101,10 +103,10 @@
                     android:id="@+id/height_txt"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="@dimen/text_margin_end"
-                    android:text="@string/height"
+                    android:layout_weight="1"
                     android:labelFor="@+id/height_input"
+                    android:text="@string/height"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <EditText
@@ -113,12 +115,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/square_edittext"
-                    android:importantForAutofill="no"
-                    android:padding="@dimen/padding_standard"
-                    android:inputType="numberDecimal"
                     android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/padding_standard"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize"/>
+                    tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
 
             <!-- BMI Input -->
@@ -132,25 +134,25 @@
                     android:id="@+id/bmi_txt"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="@dimen/text_margin_end"
-                    android:text="@string/bmi"
+                    android:layout_weight="1"
                     android:labelFor="@+id/bmi_input"
+                    android:text="@string/bmi"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <EditText
                     android:id="@+id/bmi_input"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/square_edittext"
-                    android:padding="@dimen/padding_standard"
-                    android:focusable="false"
                     android:cursorVisible="false"
+                    android:focusable="false"
                     android:gravity="end|center_vertical"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/padding_standard"
                     tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
 
@@ -165,26 +167,26 @@
                     android:id="@+id/classification_txt"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="@dimen/text_margin_end"
-                    android:text="@string/classification"
+                    android:layout_weight="1"
                     android:labelFor="@+id/classification_input"
+                    android:text="@string/classification"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <EditText
                     android:id="@+id/classification_input"
-                    android:inputType="text"
-                    android:gravity="end|center_vertical"
-                    android:importantForAutofill="no"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/square_edittext"
-                    android:padding="@dimen/padding_standard"
-                    android:focusable="false"
                     android:cursorVisible="false"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize"/>
+                    android:focusable="false"
+                    android:gravity="end|center_vertical"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_standard"
+                    tools:ignore="VisualLintTextFieldSize|TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
         </LinearLayout>
 
@@ -202,9 +204,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="?android:attr/colorAccent"
-                android:textColor="@android:color/white"
                 android:padding="@dimen/button_padding"
                 android:text="@string/submit_btn"
+                android:textColor="@android:color/white"
                 android:textStyle="bold"
                 tools:ignore="VisualLintButtonSize" />
         </LinearLayout>

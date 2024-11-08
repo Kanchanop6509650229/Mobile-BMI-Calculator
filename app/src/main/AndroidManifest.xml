@@ -13,11 +13,13 @@
         android:theme="@style/Theme.BMICal"
         tools:targetApi="31">
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".HistoryActivity"
             android:parentActivityName=".MainActivity"
             android:noHistory="true"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
